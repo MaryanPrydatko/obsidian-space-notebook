@@ -1,0 +1,19 @@
+{
+  "name": "obsidian-space-notebook",
+  "version": "0.1.0",
+  "description": "Space Notebook: a handwriting notebook for Obsidian",
+  "scripts": {
+    "dev": "node esbuild.config.mjs --watch",
+    "build": "tsc --noEmit && node esbuild.config.mjs",
+    "deploy": "npm run build && mkdir -p \"$HOME/Obsidian/salamind/.obsidian/plugins/space-notebook\" && cp main.js manifest.json styles.css \"$HOME/Obsidian/salamind/.obsidian/plugins/space-notebook/\""
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "obsidian": "^1.14.4",
+    "perfect-freehand": "1.2.2",
+    "typescript": "^7.0.2"
+  },
+  "private": true
+}
