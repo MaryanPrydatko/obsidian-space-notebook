@@ -1,0 +1,135 @@
+/* Space Notebook. Ported from Space (the notebook rules in space.html), with Space's colours read from Obsidian's theme. */
+.space-notebook-view.view-content { padding: 0; overflow: hidden; }
+.nb, .nb-type {
+  --void: var(--background-secondary);
+  --void-2: var(--background-secondary-alt, var(--background-secondary));
+  --paper: var(--background-primary);
+  --ink: var(--text-normal);
+  --on-ink: var(--background-primary);
+  --soft: var(--text-muted);
+  --dim: var(--text-faint);
+  --accent: var(--interactive-accent);
+  --late: var(--color-red, #d9534f);
+  --late-text: var(--text-error);
+  --sans: var(--font-interface);
+}
+.space-notebook-view .glass { background: var(--background-primary); border: 1px solid var(--background-modifier-border); box-shadow: var(--shadow-l); }
+/* Obsidian dresses every button and select: undone here at Obsidian's own weight, so the notebook's rules below win */
+:where(.space-notebook-view) button:not(.clickable-icon) { box-shadow: none; height: auto; margin: 0; padding: 0; font-size: inherit; }
+:where(.space-notebook-view) select { box-shadow: none; height: auto; background-image: none; }
+.space-notebook-view [hidden] { display: none !important; }
+.space-notebook-view .nb-sw { flex: none; }
+.space-notebook-view .nb-top .nb-b, .space-notebook-view .nb-top .nb-paper { white-space: nowrap; }
+.space-notebook-view .nb { position: relative; height: 100%; display: flex; flex-direction: column; background: var(--void); outline: none; }
+.space-notebook-view .nb-top, .space-notebook-view .nb-tools { display: flex; align-items: center; gap: 8px; padding: 10px 14px; }
+.space-notebook-view .nb-top { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .space-notebook-view .nb-top::-webkit-scrollbar { display: none; } .space-notebook-view .nb-top > * { flex: none; } .space-notebook-view .nb-top .grow { flex: 1 0 8px; } .space-notebook-view .nb-tools { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .space-notebook-view .nb-tools::-webkit-scrollbar { display: none; } .space-notebook-view .nb-tools > * { flex: none; }
+.space-notebook-view .nb-b[data-armed] { background: var(--late, #d9534f); color: #fff; border-color: transparent; }
+.space-notebook-view .nb-top { padding-top: max(10px, env(safe-area-inset-top)); border-bottom: 1px solid color-mix(in srgb, var(--text-normal) 8%, transparent); }
+.space-notebook-view .nb-tools { border-bottom: 1px solid color-mix(in srgb, var(--text-normal) 8%, transparent); gap: 4px; }
+.space-notebook-view .nb-title { font: 650 17px var(--sans); color: var(--ink); background: transparent; border: 1px solid transparent; border-radius: 8px; padding: 6px 8px; min-width: 120px; max-width: 40vw; }
+.space-notebook-view .nb-title:hover, .space-notebook-view .nb-title:focus { border-color: color-mix(in srgb, var(--text-normal) 15%, transparent); outline: none; }
+.space-notebook-view .nb-status, .space-notebook-view .nb-page { font: 500 13px var(--sans); color: var(--dim); white-space: nowrap; }
+.space-notebook-view .nb .grow { flex: 1; }
+.space-notebook-view .nb-b, .space-notebook-view .nb-t { border: 1px solid color-mix(in srgb, var(--text-normal) 10%, transparent); background: var(--paper); color: var(--ink); font: 600 13px var(--sans); border-radius: 10px; padding: 7px 12px; min-height: 36px; cursor: pointer; }
+.space-notebook-view .nb-b.primary { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.space-notebook-view .nb-b:disabled, .space-notebook-view .nb-t:disabled { opacity: 0.4; cursor: default; }
+.space-notebook-view .nb-t[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.space-notebook-view .nb-t.danger { color: var(--late-text); }
+.space-notebook-view .nb-paper { font: 600 13px var(--sans); color: var(--ink); background: var(--paper); border: 1px solid color-mix(in srgb, var(--text-normal) 10%, transparent); border-radius: 10px; padding: 7px 8px; min-height: 36px; }
+.space-notebook-view .nb-sw { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; }
+.space-notebook-view .nb-sw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--void), 0 0 0 4px var(--ink); }
+.space-notebook-view .nb-sep { width: 1px; height: 24px; background: color-mix(in srgb, var(--text-normal) 12%, transparent); margin: 0 6px; }
+/* the notebook is for writing, not selecting: a pen, a finger or a long press never highlights its words; fields still do */
+.space-notebook-view .nb { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.space-notebook-view .nb input, .space-notebook-view .nb textarea, .space-notebook-view .nb select { -webkit-user-select: text; user-select: text; }
+.space-notebook-view .nb-ico { width: 44px; min-width: 44px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.space-notebook-view .nb-pen { width: 44px; height: 40px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--text-normal) 10%, transparent); background: var(--paper); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+.space-notebook-view .nb-pen-dot { display: block; border-radius: 50%; box-shadow: 0 0 0 1px color-mix(in srgb, var(--text-normal) 15%, transparent); }
+.space-notebook-view .nb-quick { display: inline-flex; gap: 6px; align-items: center; margin-left: 4px; }
+.space-notebook-view .nb.dock-bottom .nb-tools { order: 3; border-bottom: 0; border-top: 1px solid color-mix(in srgb, var(--text-normal) 8%, transparent); padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+.space-notebook-view .nb.dock-bottom .nb-stage { order: 2; }
+.space-notebook-view .nb-menu { position: fixed; z-index: 72; display: flex; flex-direction: column; gap: 6px; padding: 8px; border-radius: 14px; min-width: 220px; }
+.space-notebook-view .nb-menu[hidden] { display: none; }
+.space-notebook-view .nb-menu .nb-b { text-align: left; }
+.space-notebook-view .nb-menu-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font: 600 13px var(--sans); color: var(--soft); padding: 2px 4px; }
+.space-notebook-view .nb-paper[hidden] { display: none; }
+@media (max-width: 900px) { .space-notebook-view .nb-quick .nb-sw:nth-child(n+5) { display: none; } } /* narrower screens: your four latest colours */
+.space-notebook-view .nb-pop { position: fixed; z-index: 72; width: 288px; padding: 14px; border-radius: 18px; display: flex; flex-direction: column; gap: 10px; }
+.space-notebook-view .nb-pop-h { display: flex; justify-content: space-between; align-items: baseline; font: 600 13px var(--sans); color: var(--soft); }
+.space-notebook-view .nb-pop-h b { font-weight: 650; color: var(--ink); }
+.space-notebook-view .nb-preview { width: 240px; height: 56px; align-self: center; border-radius: 10px; background: var(--paper); }
+.space-notebook-view .nb-size { width: 100%; accent-color: var(--ink); min-height: 32px; }
+.space-notebook-view .nb-presets { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.space-notebook-view .nb-preset { width: 40px; height: 40px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--text-normal) 10%, transparent); background: var(--paper); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+.space-notebook-view .nb-preset span { display: block; border-radius: 50%; background: var(--ink); }
+.space-notebook-view .nb-preset[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.space-notebook-view .nb-keep { border: 0; background: none; color: var(--accent); font: 600 13px var(--sans); cursor: pointer; padding: 8px; }
+.space-notebook-view .nb-palette { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; justify-items: center; }
+.space-notebook-view .nb-palette .nb-sw { width: 34px; height: 34px; }
+.space-notebook-view .nb-own { grid-column: span 6; justify-self: start; display: inline-flex; align-items: center; gap: 8px; font: 600 13px var(--sans); color: var(--soft); cursor: pointer; }
+.space-notebook-view .nb-own input { width: 34px; height: 34px; border: 0; padding: 0; background: none; cursor: pointer; }
+/* a finger and a pencil need bigger targets than a mouse: 44 px tall, tools 52 px wide, icons 23 px */
+@media (pointer: coarse) {
+  .space-notebook-view .nb-top, .space-notebook-view .nb-tools { padding: 10px 16px; gap: 8px; }
+  .space-notebook-view .nb-b, .space-notebook-view .nb-t, .space-notebook-view .nb-paper { min-height: 44px; font-size: 15px; padding: 9px 14px; }
+  .space-notebook-view .nb-ico { width: 52px; min-width: 52px; height: 44px; padding: 0; } .space-notebook-view .nb-ico svg { width: 23px; height: 23px; }
+  .space-notebook-view .nb-pen { width: 52px; height: 44px; }
+  .space-notebook-view .nb-sw { width: 36px; height: 36px; }
+  .space-notebook-view .nb-title { font-size: 19px; }
+  .space-notebook-view .nb-pop { width: 320px; } .space-notebook-view .nb-palette .nb-sw { width: 38px; height: 38px; } .space-notebook-view .nb-preset { width: 44px; height: 44px; }
+  /* every control in the toolbar is a finger's size (interaction walk 8 Nov, I13: page arrows 29 wide, See all pages 29
+     tall, the colours 36, More 34): the arrows and More 44 wide, the page count and the name 44 tall, and your recent
+     colours a 44 px target round the same 36 px dot (the ring sits in the target) */
+  .space-notebook-view .nb-b { min-width: 44px; } .space-notebook-view .nb-title { min-height: 44px; }
+  .space-notebook-view .nb-page { display: inline-flex; align-items: center; min-height: 44px; }
+  .space-notebook-view .nb-quick { gap: 0; margin-left: 0; }
+  .space-notebook-view .nb-quick .nb-sw { width: 44px; height: 44px; padding: 4px; border: 0; background-clip: content-box !important; }
+  .space-notebook-view .nb-quick .nb-sw[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--ink); }
+}
+.space-notebook-view .nb-stage { flex: 1; position: relative; overflow: hidden; }
+.space-notebook-view .nb-say { position: absolute; z-index: 3; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: max-content; max-width: calc(100% - 32px); display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; border-radius: 16px; background: var(--paper); color: var(--soft); font: 500 13.5px/1.4 var(--sans); } .space-notebook-view .nb-say .nb-b { flex: none; white-space: nowrap; } /* the finger and Pencil line, once (client/notebook/pointers.js) */
+.space-notebook-view .nb-page { cursor: pointer; padding: 6px 8px; border-radius: 8px; } .space-notebook-view .nb-page:hover { background: color-mix(in srgb, var(--text-normal) 6%, transparent); }
+.space-notebook-view .nb-over { position: absolute; inset: 0; z-index: 2; background: var(--void); overflow-y: auto; padding: 16px; }
+.space-notebook-view .nb-over-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font: 650 17px var(--sans); color: var(--ink); }
+.space-notebook-view .nb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+.space-notebook-view .nb-thumb { display: flex; flex-direction: column; align-items: center; gap: 6px; border: 2px solid transparent; background: none; border-radius: 12px; padding: 6px; cursor: pointer; color: var(--soft); font: 600 13px var(--sans); }
+.space-notebook-view .nb-thumb canvas { width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
+.space-notebook-view .nb-thumb.on { border-color: var(--ink); }
+.space-notebook-view .nb-thumb.add { justify-content: center; min-height: 160px; border: 2px dashed color-mix(in srgb, var(--text-normal) 20%, transparent); color: var(--accent); }
+.space-notebook-view .nb-side { position: absolute; left: 0; top: 0; bottom: 0; width: 150px; overflow-y: auto; padding: 10px 8px 24px; border-right: 1px solid color-mix(in srgb, var(--text-normal) 8%, transparent); background: var(--void-2); display: flex; flex-direction: column; gap: 6px; }
+.space-notebook-view .nb-side[hidden] { display: none; }
+.space-notebook-view .nb-pdf { position: fixed; z-index: 70; display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 14px; font: 600 13px var(--sans); color: var(--soft); }
+.space-notebook-view .nb-side-list { display: flex; flex-direction: column; gap: 4px; }
+.space-notebook-view .nb-side .nb-thumb { padding: 5px; font-size: 12px; } .space-notebook-view .nb-side .nb-thumb.add { min-height: 56px; }
+.space-notebook-view .nb-stage.with-side .nb-canvas { left: 150px; width: calc(100% - 150px); }
+@media (max-width: 700px) { .space-notebook-view .nb-side { width: 96px; } .space-notebook-view .nb-stage.with-side .nb-canvas { left: 96px; width: calc(100% - 96px); } }
+.space-notebook-view .nb-canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+.space-notebook-view .nb-live { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; } /* the line being written, above the page */
+.space-notebook-view .nb-stage.with-side .nb-live { left: 150px; width: calc(100% - 150px); }
+@media (max-width: 700px) { .space-notebook-view .nb-stage.with-side .nb-live { left: 96px; width: calc(100% - 96px); } }
+/* an upright iPad (601 to 900 px wide, touch): the whole toolbar in one row, Undo and Redo included (the pencil made it
+   80 px too wide at 820): tool buttons 48 px wide, still past the 44 px a finger needs, and your three latest colours (two below 800 px) */
+@media (pointer: coarse) and (min-width: 601px) and (max-width: 900px) {
+  .space-notebook-view .nb-tools { gap: 6px; } .space-notebook-view .nb-tools .nb-ico, .space-notebook-view .nb-tools .nb-pen { width: 48px; min-width: 48px; }
+  .space-notebook-view .nb-top .nb-title { flex: 1 1 auto; min-width: 70px; max-width: none; text-overflow: ellipsis; } /* the name gives way, so the row keeps one line down to the iPad mini (744) */
+  .space-notebook-view .nb-quick .nb-sw:nth-child(n+4) { display: none; }
+}
+@media (pointer: coarse) and (min-width: 601px) and (max-width: 800px) { /* iPad mini and the older 768 px ones */
+  .space-notebook-view .nb-tools .nb-ico, .space-notebook-view .nb-tools .nb-pen { width: 46px; min-width: 46px; } .space-notebook-view .nb-quick .nb-sw:nth-child(n+3) { display: none; }
+}
+/* a phone: every notebook control in view, none behind a sideways scroll (design audit, 7 Nov: colour, size, undo and
+   redo were off the screen): the tools wrap to two rows of 44 px buttons (the first divider breaks the row), and the
+   top bar keeps Done, Pages, the name, + Page and More (pages scroll one below the other there, so no Previous or Next) */
+@media (max-width: 600px) {
+  .space-notebook-view .nb-tools { flex-wrap: wrap; row-gap: 6px; overflow: visible; }
+  .space-notebook-view .nb-tools .nb-t.nb-ico, .space-notebook-view .nb-tools .nb-pen { width: 44px; min-width: 44px; padding-left: 0; padding-right: 0; justify-content: center; }
+  .space-notebook-view .nb-tools .nb-sep:first-of-type { flex-basis: 100%; width: 0; height: 0; border: 0; margin: 0; }
+  .space-notebook-view .nb-tools .nb-sep:not(:first-of-type) { display: none; }
+  .space-notebook-view .nb-top .nb-page, .space-notebook-view .nb-top .nb-view, .space-notebook-view .nb-top .nb-b[aria-label^="Previous page"], .space-notebook-view .nb-top .nb-b[aria-label^="Next page"] { display: none; }
+  .space-notebook-view .nb-top .nb-title { flex: 1 1 auto; min-width: 0; max-width: none; text-overflow: ellipsis; }
+}
+@media (max-width: 900px) { .space-notebook-view .nb-top .nb-status { display: none; } .space-notebook-view .nb-title { min-width: 70px; max-width: 24vw; } .space-notebook-view .nb-top { gap: 6px; } .space-notebook-view .nb-top .nb-b { padding-left: 11px; padding-right: 11px; } }
+.space-notebook-view .nb-canvas[data-tool="eraser"] { cursor: cell; }
+.space-notebook-view .nb-canvas[data-tool="text"] { cursor: text; }
+body .nb-type { position: fixed; z-index: 60; background: transparent; border: 1.5px dashed var(--accent); border-radius: 6px; padding: 0 4px; margin: -2px -5px; outline: none; resize: none; overflow: hidden; line-height: 1.3; min-height: 1.4em; } .space-notebook-view .nb-canvas[data-tool="lasso"] { cursor: default; }
+body.nb-open .hud-top, body.nb-open .hud-right, body.nb-open .lens { visibility: hidden; }
