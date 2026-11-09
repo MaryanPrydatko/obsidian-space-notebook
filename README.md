@@ -1,8 +1,12 @@
+<img src="docs/logo.svg" width="96" alt="">
+
 # Space Notebook
 
 A handwriting notebook for Obsidian, ported from the notebook in Space: A4 pages, paper (blank, lined, squared, dots),
 pen with pressure, pencil, highlighter, eraser, lasso (move, recolour, resize, delete), text, shapes, ruler, undo and
 redo, a pages sidebar, Scroll / Pages / Whiteboard views, and PDF export.
+
+![Space Notebook in Obsidian](docs/screenshot.png)
 
 ## Install
 
