@@ -1,4 +1,4 @@
-import { normalizePath, Plugin, type TFolder } from 'obsidian';
+import { Menu, normalizePath, Plugin, type TFolder } from 'obsidian';
 import { EXTENSION, NotebookView, VIEW_TYPE } from './view';
 
 // An empty notebook: one lined page.
@@ -12,6 +12,19 @@ export default class SpaceNotebookPlugin extends Plugin {
       id: 'new-notebook',
       name: 'New notebook',
       callback: () => this.newNotebook(),
+    });
+    // left bar: new notebook, or one of the last ones you wrote in
+    this.addRibbonIcon('pen-tool', 'Notebooks', (evt) => {
+      const menu = new Menu();
+      menu.addItem((i) => i.setTitle('New notebook').setIcon('plus').onClick(() => this.newNotebook()));
+      const recent = this.app.vault.getFiles().filter((f) => f.extension === EXTENSION)
+        .sort((a, b) => b.stat.mtime - a.stat.mtime).slice(0, 8);
+      if (recent.length) menu.addSeparator();
+      for (const f of recent) {
+        menu.addItem((i) => i.setTitle(f.basename).setIcon('notebook-pen')
+          .onClick(() => this.app.workspace.getLeaf(false).openFile(f)));
+      }
+      menu.showAtMouseEvent(evt);
     });
   }
 
