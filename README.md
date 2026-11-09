@@ -11,7 +11,7 @@ Not in the community plugin list yet. Either:
 - With [BRAT](https://github.com/TfTHacker/obsidian42-brat): Add beta plugin, paste `MaryanPrydatko/obsidian-space-notebook`.
 - By hand: download `main.js`, `manifest.json` and `styles.css` from the [latest release](https://github.com/MaryanPrydatko/obsidian-space-notebook/releases/latest) into `<vault>/.obsidian/plugins/space-notebook/`, then turn on Space Notebook in Settings, Community plugins.
 
-Desktop only for now (macOS, Windows, Linux).
+Works on desktop, iPad and iPhone. With BRAT on a phone or iPad, add it there too.
 
 ## Files
 
@@ -45,8 +45,7 @@ own state. `file.js` replaces Space's `api.js` (the D1 `ink` rows) with the one 
 
 Not ported yet: pictures on a page, PDF import, the iPad measuring probe. Live sync is dropped (Syncthing syncs the files).
 
-`isDesktopOnly` is true for now. The code is written for mobile (Pointer Events, no Node APIs, `touch-action: none`),
-but it has not been tried on an iPad.
+Mobile works through Pointer Events, no Node APIs, and `touch-action: none` on the page.
 
 ## Licence
 

@@ -1,7 +1,7 @@
 {
   "id": "space-notebook",
   "name": "Space Notebook",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "minAppVersion": "1.5.0",
   "description": "A handwriting notebook with pages, pen pressure, highlighter, eraser, lasso, shapes, text and PDF export. Ported from Space.",
   "author": "Maryan Prydatko",
