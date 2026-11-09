@@ -4,6 +4,15 @@ A handwriting notebook for Obsidian, ported from the notebook in Space: A4 pages
 pen with pressure, pencil, highlighter, eraser, lasso (move, recolour, resize, delete), text, shapes, ruler, undo and
 redo, a pages sidebar, Scroll / Pages / Whiteboard views, and PDF export.
 
+## Install
+
+Not in the community plugin list yet. Either:
+
+- With [BRAT](https://github.com/TfTHacker/obsidian42-brat): Add beta plugin, paste `MaryanPrydatko/obsidian-space-notebook`.
+- By hand: download `main.js`, `manifest.json` and `styles.css` from the [latest release](https://github.com/MaryanPrydatko/obsidian-space-notebook/releases/latest) into `<vault>/.obsidian/plugins/space-notebook/`, then turn on Space Notebook in Settings, Community plugins.
+
+Desktop only for now (macOS, Windows, Linux).
+
 ## Files
 
 Each notebook is one `.notebook` file: compact JSON, `{ "v": 1, "paper": "lined", "pages": [{ "paper": "lined", "strokes": [...] }] }`.
@@ -26,7 +35,7 @@ A file that does not read as a notebook opens empty and is never written over.
 npm install
 npm run build    # typecheck and bundle main.js
 npm run dev      # rebuild on change
-npm run deploy   # build and copy main.js, manifest.json, styles.css into ~/Obsidian/salamind/.obsidian/plugins/space-notebook/
+OBSIDIAN_VAULT=~/path/to/vault npm run deploy   # build and copy main.js, manifest.json, styles.css into the vault's plugins/space-notebook/
 ```
 
 `src/notebook/*.js` are Space's notebook parts (`client/notebook/`), kept close to the original so they can be compared.

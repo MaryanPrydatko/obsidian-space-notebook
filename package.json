@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node esbuild.config.mjs --watch",
     "build": "tsc --noEmit && node esbuild.config.mjs",
-    "deploy": "npm run build && mkdir -p \"$HOME/Obsidian/salamind/.obsidian/plugins/space-notebook\" && cp main.js manifest.json styles.css \"$HOME/Obsidian/salamind/.obsidian/plugins/space-notebook/\""
+    "deploy": "npm run build && D=\"${OBSIDIAN_VAULT:-$HOME/Obsidian/salamind}/.obsidian/plugins/space-notebook\" && mkdir -p \"$D\" && cp main.js manifest.json styles.css \"$D/\""
   },
   "license": "MIT",
   "type": "commonjs",
