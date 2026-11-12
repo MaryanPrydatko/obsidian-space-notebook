@@ -81,13 +81,15 @@
   function draw() {
     if (!st) return; var c = st.canvas, g = st.g, dpr = win.devicePixelRatio || 1, v = st.view, hCss = c.height / dpr, acc = accent();
     g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, c.width, c.height);
-    // writing a line, a shape or a lasso: the rest of the page is the picture taken when you started
+    // writing a line, a shape or a lasso: the rest of the page is the picture taken when you started.
+    // One picture canvas for the notebook's life, sized again only when the view is. Before, every stroke made a new
+    // full-screen one (15 to 20 MB on an iPad), freed only whenever Safari collected it.
     var still = (st.live || (st.lasso && !st.moving)) && !st.erasing;
     if (still) {
       var key = c.width + 'x' + c.height + ':' + v.k + ':' + v.x + ':' + v.y + ':' + st.n + ':' + st.page.strokes.length;
-      if (!st.base || st.baseKey !== key) { var b = st.base || el('canvas'); b.width = c.width; b.height = c.height; var bg = b.getContext('2d'); bg.setTransform(1, 0, 0, 1, 0, 0); bg.clearRect(0, 0, b.width, b.height); scene(bg, dpr, v, hCss); st.base = b; st.baseKey = key; }
+      if (!st.base || st.baseKey !== key) { var b = st.base || el('canvas'); if (b.width !== c.width || b.height !== c.height) { b.width = c.width; b.height = c.height; } var bg = b.getContext('2d'); bg.setTransform(1, 0, 0, 1, 0, 0); bg.clearRect(0, 0, b.width, b.height); scene(bg, dpr, v, hCss); st.base = b; st.baseKey = key; }
       g.drawImage(st.base, 0, 0);
-    } else { st.base = null; scene(g, dpr, v, hCss); }
+    } else { st.baseKey = null; scene(g, dpr, v, hCss); }
     g.setTransform(dpr * v.k, 0, 0, dpr * v.k, dpr * v.x, dpr * vy());
     if (st.live && !onLayer(st.live)) drawStroke(g, st.live);
     drawLive();

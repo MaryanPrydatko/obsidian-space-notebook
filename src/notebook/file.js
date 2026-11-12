@@ -43,7 +43,7 @@
     serialize: serialize,
     destroy: destroy,
     // the look changed (light or dark, a theme): colours are read again and every page drawn again
-    refresh: function () { if (!st) return; themed = {}; GRAIN = {}; st.g._grain = null; st.lg._grain = null; st.base = null; if (st.side) st.side.querySelector('.nb-side-list').textContent = ''; side(); st.showPen(); render(); },
+    refresh: function () { if (!st) return; themed = {}; GRAIN = {}; st.g._grain = null; st.lg._grain = null; st.baseKey = null; if (st.base) st.base.getContext('2d')._grain = null; if (st.side) st.side.querySelector('.nb-side-list').textContent = ''; side(); st.showPen(); render(); },
     saved: function () { if (st && st.status.textContent === 'Saving') st.status.textContent = 'Saved'; },
     renamed: function () { if (st) st.title.value = io.title() || 'Notebook'; },
     pdf: function (all) { return pdfOf(all); },

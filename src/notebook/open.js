@@ -138,5 +138,6 @@
     if (!st) return; var s = st;
     if (s.raf) win.cancelAnimationFrame(s.raf); if (s.rraf) win.cancelAnimationFrame(s.rraf); if (s.lraf) win.cancelAnimationFrame(s.lraf); clearTimeout(s.thumbT); clearTimeout(s.holdT);
     if (s.ro) s.ro.disconnect(); if (s.typing) s.typing.remove();
+    if (s.base) s.base.width = s.base.height = 0; // gives its memory back now, not whenever Safari collects it
     s.w.querySelectorAll('.nb-pop, .nb-pdf').forEach(function (x) { x.remove(); }); s.w.remove(); if (probeEl) probeEl.remove(); st = null;
   }
